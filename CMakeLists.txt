@@ -24,8 +24,12 @@ set(JSON_BuildTests OFF CACHE INTERNAL "")
 set(JSON_Install OFF CACHE INTERNAL "")
 add_subdirectory(dependencies/nlohmann_json)
 
+# json-schema-validator
+set(nlohmann_json_VERSION v3.11.3 CACHE INTERNAL "")
+add_subdirectory(dependencies/json-schema-validator)
+
 
 ### executable
 
 add_executable(main src/main.cpp)
-target_link_libraries(main PRIVATE nlohmann_json::nlohmann_json)
+target_link_libraries(main PRIVATE nlohmann_json::nlohmann_json nlohmann_json_schema_validator)
