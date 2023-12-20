@@ -10,7 +10,15 @@
 
 #include <iostream>
 
+#include <nlohmann/json.hpp>
+
+
+using json = nlohmann::json;
+
 int main() {
-  std::cout << "Hello, IndoorJson!" << std::endl;
+  json hello = {
+    {"hello", "IndoorJson!"},
+  };
+  std::cout << hello.dump() << std::endl;
   return 0;
 }
