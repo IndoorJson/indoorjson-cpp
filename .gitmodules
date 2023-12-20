@@ -1,3 +1,6 @@
 [submodule "dependencies/json"]
 	path = dependencies/nlohmann_json
 	url = https://github.com/nlohmann/json.git
+[submodule "dependencies/json-schema-validator"]
+	path = dependencies/json-schema-validator
+	url = https://github.com/pboettch/json-schema-validator.git
