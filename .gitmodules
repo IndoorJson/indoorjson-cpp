@@ -4,3 +4,6 @@
 [submodule "dependencies/json-schema-validator"]
 	path = dependencies/json-schema-validator
 	url = https://github.com/pboettch/json-schema-validator.git
+[submodule "dependencies/geos"]
+	path = dependencies/geos
+	url = https://github.com/libgeos/geos.git
