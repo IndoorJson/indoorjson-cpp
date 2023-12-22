@@ -8,12 +8,15 @@
  *
  */
 
+
 #include <geos/geom/Geometry.h>
 #include <geos/geom/GeometryFactory.h>
 #include <geos/io/WKTWriter.h>
 
 #include <iostream>
 #include <nlohmann/json-schema.hpp>
+
+#include <indoor_features.h>
 
 using nlohmann::json;
 using nlohmann::json_schema::json_validator;

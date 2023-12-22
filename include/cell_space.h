@@ -1,5 +1,5 @@
 /*
- * indoor_features.h
+ * cell_space.h
  *
  * Copyright (c) 2023 IndoorJson
  *
@@ -9,20 +9,24 @@
  */
 #pragma once
 
+#include <geos/geom/Geometry.h>
+
 #include <memory>
 #include <vector>
 
 #include "ptr.h"
-#include "thematic_layer.h"
-#include "inter_layer_connection.h"
 
 namespace indoor_json {
 
-struct IndoorFeatures {
-  std::vector<ThematicLayerPtr> layers;
-  std::vector<InterLayerConnectionPtr> layer_connections;
+FORWARD_DEC_WPTR(CellBoundary)
+FORWARD_DEC_WPTR(Node)
+
+struct CellSpace {
+  geos::geom::Geometry::Ptr geom;
+  std::vector<CellBoundaryWPtr> boundaries;
+  NodeWPtr node;
 };
 
-DEFINE_PTR(IndoorFeatures)
+DEFINE_PTR(CellSpace)
 
 }  // namespace indoor_json

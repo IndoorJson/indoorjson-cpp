@@ -1,5 +1,5 @@
 /*
- * indoor_features.h
+ * primal_space_layer.h
  *
  * Copyright (c) 2023 IndoorJson
  *
@@ -13,16 +13,16 @@
 #include <vector>
 
 #include "ptr.h"
-#include "thematic_layer.h"
-#include "inter_layer_connection.h"
+#include "cell_space.h"
+#include "cell_boundary.h"
 
 namespace indoor_json {
 
-struct IndoorFeatures {
-  std::vector<ThematicLayerPtr> layers;
-  std::vector<InterLayerConnectionPtr> layer_connections;
+struct PrimalSpaceLayer {
+  std::vector<CellSpacePtr> cell_spaces;
+  std::vector<CellBoundaryPtr> cell_boundaries;
 };
 
-DEFINE_PTR(IndoorFeatures)
+DEFINE_PTR(PrimalSpaceLayer)
 
 }  // namespace indoor_json
