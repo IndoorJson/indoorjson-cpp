@@ -11,6 +11,8 @@
 #pragma once
 
 #include <nlohmann/json.hpp>
+#include <geos/io/WKTWriter.h>
+#include <geos/io/WKTReader.h>
 
 #include "cell_space.h"
 #include "indoor_features.h"
