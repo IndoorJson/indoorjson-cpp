@@ -81,9 +81,12 @@ int main() {
   indoor_json::EdgePtr edge;
   edge.reset(new indoor_json::Edge());
   edge->id = "@edge_id";
-
   node.edges.emplace_back(indoor_json::EdgeWPtr(edge));
 
+  indoor_json::CellSpacePtr space;
+  space.reset(new indoor_json::CellSpace());
+  space->id = "$space_id";
+  node.space = indoor_json::CellSpaceWPtr(space);
 
   json j;
   to_json(j, node);
