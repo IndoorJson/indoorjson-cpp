@@ -6,7 +6,7 @@
 cmake_minimum_required(VERSION 3.12)
 project(indoorjson-cpp)
 
-### standard
+### C++ standard
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -25,11 +25,18 @@ set(JSON_Install OFF CACHE INTERNAL "")
 add_subdirectory(dependencies/nlohmann_json)
 
 # json-schema-validator
-set(nlohmann_json_VERSION v3.11.3 CACHE INTERNAL "")
+set(nlohmann_json_VERSION v3.10.5 CACHE INTERNAL "")
 add_subdirectory(dependencies/json-schema-validator)
+
+# libgeos
+add_subdirectory(dependencies/geos)
 
 
 ### executable
 
 add_executable(main src/main.cpp)
-target_link_libraries(main PRIVATE nlohmann_json::nlohmann_json nlohmann_json_schema_validator)
+target_link_libraries(main PRIVATE
+  nlohmann_json::nlohmann_json
+  nlohmann_json_schema_validator
+  geos
+  )

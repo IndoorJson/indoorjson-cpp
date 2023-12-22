@@ -36,3 +36,7 @@ build
 
 # Vim
 *.swp
+
+# vs
+.vs
+CMakeSettings.json
