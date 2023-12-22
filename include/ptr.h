@@ -11,9 +11,10 @@
 
 #include <memory>
 
-#define DEFINE_PTR(type) using type##Ptr = std::shared_ptr<type>; \
-using type##WPtr = std::weak_ptr<type>;
+#define DEFINE_PTR(type)                   \
+  using type##Ptr = std::shared_ptr<type>; \
+  using type##WPtr = std::weak_ptr<type>;
 
-#define FORWARD_DEC_WPTR(type) struct type; \
-using type##WPtr = std::weak_ptr<type>;
-
+#define FORWARD_DEC_WPTR(type) \
+  struct type;                 \
+  using type##WPtr = std::weak_ptr<type>;

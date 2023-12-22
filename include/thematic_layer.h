@@ -9,17 +9,16 @@
  */
 #pragma once
 
-#include <memory>
-
-#include "ptr.h"
-#include "primal_space_layer.h"
 #include "dual_space_layer.h"
+#include "feature.h"
+#include "primal_space_layer.h"
+#include "ptr.h"
 
 namespace indoor_json {
 
 enum Theme { Topographic, Sensor, Logical, Unknown, Property, Other };
 
-struct ThematicLayer {
+struct ThematicLayer : Feature {
   Theme theme;
   PrimalSpaceLayerPtr primal_space;
   DualSpaceLayerPtr dual_space;

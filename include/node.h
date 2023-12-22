@@ -9,11 +9,11 @@
  */
 #pragma once
 
-#include <memory>
-#include <vector>
-
 #include <geos/geom/Geometry.h>
 
+#include <vector>
+
+#include "feature.h"
 #include "ptr.h"
 
 FORWARD_DEC_WPTR(CellSpace)
@@ -21,7 +21,7 @@ FORWARD_DEC_WPTR(Edge)
 
 namespace indoor_json {
 
-struct Node {
+struct Node : Feature {
   geos::geom::Geometry::Ptr geom;
   CellSpaceWPtr space;
   std::vector<EdgeWPtr> edges;

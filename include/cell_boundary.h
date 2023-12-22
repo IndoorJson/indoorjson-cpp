@@ -9,16 +9,17 @@
  */
 #pragma once
 
-#include "ptr.h"
-
 #include <geos/geom/Geometry.h>
+
+#include "feature.h"
+#include "ptr.h"
 
 FORWARD_DEC_WPTR(CellSpace)
 FORWARD_DEC_WPTR(Edge)
 
 namespace indoor_json {
 
-struct CellBoundary {
+struct CellBoundary : Feature {
   geos::geom::Geometry::Ptr geom;
   EdgeWPtr edge;
   std::vector<CellSpaceWPtr> spaces;

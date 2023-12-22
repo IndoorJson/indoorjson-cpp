@@ -9,16 +9,16 @@
  */
 #pragma once
 
-#include <memory>
 #include <vector>
 
-#include "ptr.h"
-#include "cell_space.h"
 #include "cell_boundary.h"
+#include "cell_space.h"
+#include "feature.h"
+#include "ptr.h"
 
 namespace indoor_json {
 
-struct PrimalSpaceLayer {
+struct PrimalSpaceLayer : Feature {
   std::vector<CellSpacePtr> cell_spaces;
   std::vector<CellBoundaryPtr> cell_boundaries;
 };

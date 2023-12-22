@@ -9,16 +9,16 @@
  */
 #pragma once
 
-#include <memory>
 #include <vector>
 
-#include "ptr.h"
 #include "edge.h"
+#include "feature.h"
 #include "node.h"
+#include "ptr.h"
 
 namespace indoor_json {
 
-struct DualSpaceLayer {
+struct DualSpaceLayer : Feature {
   std::vector<NodePtr> nodes;
   std::vector<EdgePtr> edges;
 };

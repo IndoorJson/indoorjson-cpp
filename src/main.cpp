@@ -11,12 +11,14 @@
 
 #include <geos/geom/Geometry.h>
 #include <geos/geom/GeometryFactory.h>
+#include <geos/geom/Envelope.h>
 #include <geos/io/WKTWriter.h>
 
 #include <iostream>
 #include <nlohmann/json-schema.hpp>
 
 #include <indoor_features.h>
+#include <serialization.h>
 
 using nlohmann::json;
 using nlohmann::json_schema::json_validator;
@@ -67,5 +69,25 @@ int main() {
     std::cerr << "Validation of schema failed: " << e.what() << "\n";
     return EXIT_FAILURE;
   }
+
+  indoor_json::Feature feature;
+  feature.id = "123";
+  feature.name = "my feature";
+  feature.description = "description of feature";
+  feature.external_ref = "https://indoorgml.org/";
+  feature.envelope.reset(new geos::geom::Envelope(0.1, 1.04, 2.05, 3.06));
+
+  json j;
+  to_json(j, feature);
+  std::string json_str = j.dump(2);
+  std::cout << json_str << std::endl;
+
+  json j2 = json::parse(json_str);
+  indoor_json::Feature feature2 = j2.get<indoor_json::Feature>();
+
+  json j3;
+  to_json(j3, feature2);
+  std::cout << j3.dump(2) << std::endl;
+
   return EXIT_SUCCESS;
 }

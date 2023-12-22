@@ -9,16 +9,16 @@
  */
 #pragma once
 
-#include <memory>
 #include <string>
 #include <vector>
 
+#include "feature.h"
 #include "ptr.h"
 #include "thematic_layer.h"
 
 namespace indoor_json {
 
-struct InterLayerConnection {
+struct InterLayerConnection : Feature {
   std::string comment;
   std::vector<ThematicLayerWPtr> layers;
   std::vector<CellSpaceWPtr> spaces;
