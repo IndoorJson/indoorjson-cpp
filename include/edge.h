@@ -14,10 +14,10 @@
 #include "feature.h"
 #include "ptr.h"
 
+namespace indoor_json {
+
 FORWARD_DEC_WPTR(CellBoundary)
 FORWARD_DEC_WPTR(Node)
-
-namespace indoor_json {
 
 struct Edge : Feature {
   geos::geom::Geometry::Ptr geom;

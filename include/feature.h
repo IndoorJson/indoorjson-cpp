@@ -15,7 +15,6 @@
 #include <cstddef>
 #include <string>
 
-#include "feature.h"
 #include "ptr.h"
 
 namespace indoor_json {

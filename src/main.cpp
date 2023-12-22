@@ -17,8 +17,8 @@
 #include <iostream>
 #include <nlohmann/json-schema.hpp>
 
-#include <indoor_features.h>
 #include <serialization.h>
+#include <indoor_features.h>
 
 using nlohmann::json;
 using nlohmann::json_schema::json_validator;
@@ -70,15 +70,23 @@ int main() {
     return EXIT_FAILURE;
   }
 
-  indoor_json::Feature feature;
-  feature.id = "123";
-  feature.name = "my feature";
-  feature.description = "description of feature";
-  feature.external_ref = "https://indoorgml.org/";
-  feature.envelope.reset(new geos::geom::Envelope(0.1, 1.04, 2.05, 3.06));
+  indoor_json::Node node;
+  node.id = "$123";
+  node.name = "my node";
+  node.description = "description of node";
+  node.external_ref = "https://indoorgml.org/";
+  node.envelope.reset(new geos::geom::Envelope(0.1, 1.04, 2.05, 3.06));
+  node.geom = factory->createLineString(cs);
+
+  indoor_json::EdgePtr edge;
+  edge.reset(new indoor_json::Edge());
+  edge->id = "@edge_id";
+
+  node.edges.emplace_back(indoor_json::EdgeWPtr(edge));
+
 
   json j;
-  to_json(j, feature);
+  to_json(j, node);
   std::string json_str = j.dump(2);
   std::cout << json_str << std::endl;
 

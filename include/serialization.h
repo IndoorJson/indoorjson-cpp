@@ -12,7 +12,8 @@
 
 #include <nlohmann/json.hpp>
 
-#include "feature.h"
+#include "cell_space.h"
+#include "indoor_features.h"
 
 using json = nlohmann::json;
 
@@ -39,6 +40,31 @@ void from_json(const json &j, Feature &feature) {
   if (j.contains("envelope"))
     feature.envelope.reset(
         new geos::geom::Envelope(j.at("envelope").get<std::string>()));
+}
+
+void to_json(json &j, const Node &node) {
+  to_json(j, static_cast<const Feature &>(node));
+
+  if (node.geom != nullptr) {
+    geos::io::WKTWriter writer;
+    j.push_back({"geom", writer.write(node.geom.get())});
+  } else {
+    j.push_back({"geom", nullptr});
+  }
+
+  if (auto space = node.space.lock())
+    j.push_back({"space", space->id});
+  else
+    j.push_back({"space", nullptr});
+
+  json j_edges = json::array();
+  for (const auto &pedge : node.edges) {
+    if (auto edge = pedge.lock())
+      j_edges.push_back(edge->id);
+    else
+      j_edges.push_back(nullptr);
+  }
+  j.push_back({"edges", j_edges});
 }
 
 }  // namespace indoor_json
