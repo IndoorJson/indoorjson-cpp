@@ -32,9 +32,17 @@ add_subdirectory(dependencies/json-schema-validator)
 add_subdirectory(dependencies/geos)
 
 
+### source code
+set(SOURCE_CODE
+  src/serialization/feature.cpp
+  src/serialization/node.cpp
+  src/serialization/cell_space.cpp
+)
+
+
 ### executable
 
-add_executable(main src/main.cpp)
+add_executable(main src/main.cpp ${SOURCE_CODE})
 target_link_libraries(main PRIVATE
   nlohmann_json::nlohmann_json
   nlohmann_json_schema_validator

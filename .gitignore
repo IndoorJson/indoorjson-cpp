@@ -40,3 +40,4 @@ build
 # vs
 .vs
 CMakeSettings.json
+out
