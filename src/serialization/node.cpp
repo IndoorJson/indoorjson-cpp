@@ -9,6 +9,9 @@
  */
 #include <serialization.h>
 
+#include <geos/io/WKTReader.h>
+#include <geos/io/WKTWriter.h>
+
 namespace indoor_json {
 
 using json = nlohmann::json;
