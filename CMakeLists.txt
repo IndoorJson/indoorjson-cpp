@@ -8,29 +8,19 @@ project(indoorjson-cpp)
 
 ### C++ standard
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+
+find_package(GEOS REQUIRED)
+find_package(glog REQUIRED)
+find_package(gtest REQUIRED)
+find_package(nlohmann_json_schema_validator REQUIRED)
 
 ### include
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
-
-
-### dependencies
-
-# nlohmann/json
-set(JSON_BuildTests OFF CACHE INTERNAL "")
-set(JSON_Install OFF CACHE INTERNAL "")
-add_subdirectory(dependencies/nlohmann_json)
-
-# json-schema-validator
-set(nlohmann_json_VERSION v3.10.5 CACHE INTERNAL "")
-add_subdirectory(dependencies/json-schema-validator)
-
-# libgeos
-add_subdirectory(dependencies/geos)
-
+include_directories(${CMAKE_INCLUDE_PATH})
 
 ### source code
 set(SOURCE_CODE
@@ -44,7 +34,7 @@ set(SOURCE_CODE
 
 add_executable(main src/main.cpp ${SOURCE_CODE})
 target_link_libraries(main PRIVATE
+  GEOS::geos
   nlohmann_json::nlohmann_json
   nlohmann_json_schema_validator
-  geos
   )
