@@ -30,6 +30,7 @@ set(SOURCE_CODE
   src/serialization/feature.cpp
   src/serialization/node.cpp
   src/serialization/cell_space.cpp
+  src/serialization/geometry.cpp
 )
 
 
