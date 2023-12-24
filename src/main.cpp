@@ -20,6 +20,8 @@
 #include <serialization.h>
 #include <indoor_features.h>
 
+#include <glog/logging.h>
+
 using nlohmann::json;
 using nlohmann::json_schema::json_validator;
 
@@ -45,7 +47,8 @@ static const json rectangle_schema = R"(
      }
  })"_json;
 
-int main() {
+int main(int argc, char* argv[]) {
+
   auto factory = geos::geom::GeometryFactory::create();
 
   std::initializer_list<geos::geom::Coordinate> coordList = {
@@ -55,7 +58,7 @@ int main() {
   auto ls = factory->createLineString(cs);
 
   geos::io::WKTWriter writer;
-  std::cout << writer.write(ls.get()) << std::endl;
+  LOG(INFO) << writer.write(ls.get()) << std::endl;
 
   try {
     json_validator validator{rectangle_schema};
@@ -64,7 +67,7 @@ int main() {
     json rectangle = "{}"_json;
     const auto default_patch = validator.validate(rectangle);
     rectangle = rectangle.patch(default_patch);
-    std::cout << rectangle.dump() << std::endl;  // {"height":10,"width":20}
+    LOG(INFO) << rectangle.dump() << std::endl;  // {"height":10,"width":20}
   } catch (const std::exception &e) {
     std::cerr << "Validation of schema failed: " << e.what() << "\n";
     return EXIT_FAILURE;
@@ -91,14 +94,14 @@ int main() {
   json j;
   to_json(j, node);
   std::string json_str = j.dump(2);
-  std::cout << json_str << std::endl;
+  LOG(INFO) << json_str << std::endl;
 
   json j2 = json::parse(json_str);
   indoor_json::Feature feature2 = j2.get<indoor_json::Feature>();
 
   json j3;
   to_json(j3, feature2);
-  std::cout << j3.dump(2) << std::endl;
+  LOG(INFO) << j3.dump(2) << std::endl;
 
   return EXIT_SUCCESS;
 }

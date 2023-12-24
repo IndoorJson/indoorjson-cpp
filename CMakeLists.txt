@@ -13,8 +13,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 find_package(nlohmann_json_schema_validator REQUIRED)
 find_package(GEOS REQUIRED)
-find_package(glog REQUIRED)
 find_package(GTest REQUIRED)
+
+find_package(glog REQUIRED)
+if(WIN32)
+    add_compile_definitions(GLOG_NO_ABBREVIATED_SEVERITIES)
+endif()
 
 ### include
 
@@ -36,4 +40,5 @@ target_link_libraries(main PRIVATE
   GEOS::geos
   nlohmann_json::nlohmann_json
   nlohmann_json_schema_validator
+  glog::glog
   )
