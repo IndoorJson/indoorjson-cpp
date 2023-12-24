@@ -44,7 +44,7 @@ for log.
 for unit test.
 
 # Build
-## install dependencies manually
+## install dependencies manually (Ubuntu 22.04)
 1. install using apt
 ```bash
 sudo apt install libglog
@@ -90,7 +90,7 @@ make -j16
 ```
 
 
-## install dependencies using conan
+## install dependencies using conan (Ubuntu 22.04)
 1. Install conan first https://conan.io/downloads
 
 2. Use conan to prepare the dependencies and generate cmake files in "build" directory.
@@ -106,3 +106,21 @@ cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release
 ```bash
 make -j16
 ```
+
+## install dependencies using conan (Windows Visual Studio Community)
+1. Install conan first https://conan.io/downloads
+
+2. Use conan to prepare the dependencies and generate cmake files in "out/build" directory.
+```bash
+conan install . --output-folder=out/build --build=missing
+```
+
+3. Open indoorjson-cpp directory using Visual Studio
+
+4. Set CMakeSettings.json
+```json
+  "installRoot": "${projectDir}\\out\\install\\${name}",
+  "cmakeCommandArgs": "-DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release",
+```
+5. Finally trigger configuration and building using VS GUI.
+
