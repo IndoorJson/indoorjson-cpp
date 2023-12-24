@@ -42,3 +42,22 @@ target_link_libraries(main PRIVATE
   nlohmann_json_schema_validator
   glog::glog
   )
+
+### tests
+enable_testing()
+
+set(TEST_CASES
+  test_feature
+)
+
+foreach(CASE ${TEST_CASES})
+  add_executable(${CASE} tests/${CASE}.cpp)
+  add_test(NAME ${CASE} COMMAND ${CASE})
+  target_link_libraries(${CASE}
+    GEOS::geos
+    nlohmann_json::nlohmann_json
+    nlohmann_json_schema_validator
+    glog::glog
+    GTest::GTest
+  )
+endforeach()
