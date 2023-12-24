@@ -11,11 +11,10 @@ project(indoorjson-cpp)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-
+find_package(nlohmann_json_schema_validator REQUIRED)
 find_package(GEOS REQUIRED)
 find_package(glog REQUIRED)
-find_package(gtest REQUIRED)
-find_package(nlohmann_json_schema_validator REQUIRED)
+find_package(GTest REQUIRED)
 
 ### include
 

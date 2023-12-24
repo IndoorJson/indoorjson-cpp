@@ -44,6 +44,51 @@ for log.
 for unit test.
 
 # Build
+## install dependencies manually
+1. install using apt
+```bash
+sudo apt install libgeos++-dev
+sudo apt install libglog
+sudo apt install libgoogle-glog-dev
+sudo apt install libgtest-dev
+sudo apt install nlohmann-json3-dev
+```
+2. install from source code
+2.1. json-schema-validator
+No apt sources is aavailable for it, so we build it from source code
+```bash
+git clone https://github.com/pboettch/json-schema-validator.git
+cd json-schema-validator
+mkdir build
+cd build
+cmake ..
+make -j16
+make install
+```
+2.2 libgeos
+The default libgeos version of Ubuntu is 3.10.2 which is not stable enough so we build the source code
+```bash
+git clone https://github.com/libgeos/geos.git
+cd geos
+git checkout 3.12.0
+mkdir build
+cd build
+cmake ..  -DBUILD_TESTING=OFF
+make -j16
+sudo make install
+```
+
+3. build indoorjson-cpp
+```bash
+cd indoorjson-cpp
+mkdir build
+cd build
+cmake ..
+make -j16
+```
+
+
+## install dependencies using conan
 1. Install conan first https://conan.io/downloads
 
 2. Use conan to prepare the dependencies and generate cmake files in "build" directory.
