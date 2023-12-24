@@ -30,18 +30,16 @@ Therefore, it is advised not to use this library in a production environment.
 # Depedencies
 
 ## json-schema-validator/2.2.0
-We use [json-schema-validator](https://github.com/pboettch/json-schema-validator) to define and validate the json string.
-
-Which use [nlohmann/json](https://github.com/nlohmann/json)
+We use [json-schema-validator](https://github.com/pboettch/json-schema-validator) to define and validate the json string which uses [nlohmann/json](https://github.com/nlohmann/json)
 
 ## geos/3.12.0
 We use [libgeos](https://github.com/libgeos/geos) to represent the Geometry of CellSpace and CellBoundary.
 
 ## glog/0.6.0
-for log.
+for logging
 
 ## gtest/1.14.0
-for unit test.
+for unit tests.
 
 # Build
 ## install dependencies manually (Ubuntu 22.04)
@@ -55,7 +53,7 @@ sudo apt install nlohmann-json3-dev
 2. install from source code
     1. json-schema-validator
 
-    No apt sources is available for it, so we build it from source code
+    No apt sources are available for it, so we need to build it from source code
     ```bash
     git clone https://github.com/pboettch/json-schema-validator.git
     cd json-schema-validator
@@ -68,7 +66,7 @@ sudo apt install nlohmann-json3-dev
 
     2. libgeos
 
-    The default libgeos version of Ubuntu 22.04 is libgeos 3.10.2 which is not stable enough so we build the source code.
+    The default libgeos version of Ubuntu 22.04 is libgeos 3.10.2 which is not stable enough so we better build if from the source code.
     ```bash
     git clone https://github.com/libgeos/geos.git
     cd geos
