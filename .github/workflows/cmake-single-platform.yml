@@ -22,7 +22,7 @@ jobs:
       uses: turtlebrowser/get-conan@v1.0
       
     - name: Create default profile
-      run: conan profile new default --detect
+      run: conan profile detect
       
     - name: Update profile
       run: conan profile update settings.compiler.libcxx=libstdc++14 default
