@@ -1,5 +1,5 @@
 /*
- * thematic_layer.h
+ * thematic_layer.cpp
  *
  * Copyright (c) 2023 IndoorJson
  *

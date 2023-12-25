@@ -19,8 +19,8 @@
 namespace indoor_json {
 
 struct PrimalSpaceLayer : Feature {
-  std::vector<CellSpacePtr> cell_spaces;
-  std::vector<CellBoundaryPtr> cell_boundaries;
+  std::vector<CellSpacePtr> spaces;
+  std::vector<CellBoundaryPtr> boundaries;
 };
 
 DEFINE_PTR(PrimalSpaceLayer)

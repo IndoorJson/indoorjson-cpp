@@ -24,28 +24,33 @@ void to_json(json &j, const Node &node) {
     j.push_back({"geom", nullptr});
   }
 
-  if (auto space = node.space.lock())
-    j.push_back({"space", space->id});
-  else
-    j.push_back({"space", nullptr});
+  j.push_back({"space", node.space});
 
-  json j_edges = json::array();
-  for (const auto &pedge : node.edges) {
-    if (auto edge = pedge.lock())
-      j_edges.push_back(edge->id);
-    else
-      j_edges.push_back(nullptr);
-  }
-  j.push_back({"edges", j_edges});
+  j.push_back({"edges", node.edges});
+}
+
+void to_json(json &j, const NodePtr &node) { to_json(j, *node.get()); }
+
+void to_json(json &j, const NodeWPtr &node) {
+  if (auto n = node.lock())
+    j = n->id;
+  else
+    j = nullptr;
 }
 
 void from_json(const json &j, Node &node) {
   from_json(j, static_cast<Feature &>(node));
 
-  if (j.contains("geom")) {
-    std::string wkt = j.at("geom").get<std::string>();
-    from_json(wkt, node.geom);
-  }
+  from_json(j.at("geom").get<std::string>(), node.geom);
+
+  j.at("space").get_to(node.space);
+
+  j.at("edges").get_to(node.edges);
+
 }
+
+void from_json(const json &j, NodePtr &node) { from_json(j, *node.get()); }
+
+void from_json(const json &j, NodeWPtr &node) {}
 
 }  // namespace indoor_json

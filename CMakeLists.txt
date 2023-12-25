@@ -28,10 +28,14 @@ include_directories(${CMAKE_INCLUDE_PATH})
 ### source code
 set(SOURCE_CODE
   src/serialization/feature.cpp
+  src/serialization/cell_space.cpp
+  src/serialization/cell_boundary.cpp
   src/serialization/node.cpp
   src/serialization/edge.cpp
-  src/serialization/cell_space.cpp
   src/serialization/geometry.cpp
+  src/serialization/thematic_layer.cpp
+  src/serialization/dual_space_layer.cpp
+  src/serialization/primal_space_layer.cpp
 )
 
 ### library
@@ -56,6 +60,7 @@ set(TEST_CASES
   test_feature
   test_node
   test_edge
+  test_thematic_layer
 )
 
 foreach(CASE ${TEST_CASES})

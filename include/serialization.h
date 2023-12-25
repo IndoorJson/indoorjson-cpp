@@ -19,22 +19,66 @@ using json = nlohmann::json;
 
 namespace indoor_json {
 
+// feature
 void to_json(json &j, const Feature &feature);
-
 void from_json(const json &j, Feature &feature);
 
+// cell space
+void to_json(json &j, const CellSpace &space);
+void to_json(json &j, const CellSpacePtr &space);
+void to_json(json &j, const CellSpaceWPtr &space);
+
+void from_json(const json &j, CellSpace &space);
+void from_json(const json &j, CellSpacePtr &space);
+void from_json(const json &j, CellSpaceWPtr &space);
+
+// cell boundary
+void to_json(json &j, const CellBoundary &boundary);
+void to_json(json &j, const CellBoundaryPtr &boundary);
+void to_json(json &j, const CellBoundaryWPtr &boundary);
+
+void from_json(const json &j, CellBoundary &boundary);
+void from_json(const json &j, CellBoundaryPtr &boundary);
+void from_json(const json &j, CellBoundaryWPtr &boundary);
+
+// node
 void to_json(json &j, const Node &node);
+void to_json(json &j, const NodePtr &node);
+void to_json(json &j, const NodeWPtr &node);
 
 void from_json(const json &j, Node &node);
+void from_json(const json &j, NodePtr &node);
+void from_json(const json &j, NodeWPtr &node);
 
+// edge
 void to_json(json &j, const Edge &edge);
+void to_json(json &j, const EdgePtr &edge);
+void to_json(json &j, const EdgeWPtr &edge);
 
 void from_json(const json &j, Edge &edge);
+void from_json(const json &j, EdgePtr &edge);
+void from_json(const json &j, EdgeWPtr &edge);
 
-void to_json(json &j, const CellSpace &space);
+// thematic layer
+void to_json(json &j, const ThematicLayer &edge);
+void to_json(json &j, const ThematicLayerPtr &edge);
+void from_json(const json &j, ThematicLayer &edge);
+void from_json(const json &j, ThematicLayerPtr &edge);
 
+// dual space layer
+void to_json(json &j, const DualSpaceLayer &layer);
+void to_json(json &j, const DualSpaceLayerPtr &layer);
+void from_json(const json &j, DualSpaceLayer &layer);
+void from_json(const json &j, DualSpaceLayerPtr &layer);
+
+// primal space layer
+void to_json(json &j, const PrimalSpaceLayer &layer);
+void to_json(json &j, const PrimalSpaceLayerPtr &layer);
+void from_json(const json &j, PrimalSpaceLayer &layer);
+void from_json(const json &j, PrimalSpaceLayerPtr &layer);
+
+// geometry
 void to_json(json &j, const geos::geom::Geometry::Ptr &geom);
-
 void from_json(const json &j, geos::geom::Geometry::Ptr &geom);
 
 }  // namespace indoor_json
