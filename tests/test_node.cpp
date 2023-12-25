@@ -1,17 +1,17 @@
 /*
- * File Name: feature_node.cpp
+ * File Name: test_node.cpp
  *
  * Copyright (c) 2023 IndoorJson
  *
  * Author: Kunlin Yu <yukunlin@syriusrobotics.com>
- * Create Date: 2023/12/24
+ * Create Date: 2023/12/25
  *
  */
-
 #include <geos/geom/GeometryFactory.h>
 #include <glog/logging.h>
-#include <gtest/gtest.h>
 #include <serialization.h>
+
+#include "test_entry.h"
 
 using nlohmann::json;
 
@@ -56,9 +56,4 @@ TEST(INDOOR_JSON, CASE1) {
   "space": "$space_id"
 })_";
   EXPECT_EQ(json_str, exp_str);
-}
-
-int main(int argc, char** argv) {
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
 }
