@@ -104,10 +104,45 @@ TEST(INDOOR_JSON, THEMATIC_LAYER) {
   b3->spaces.emplace_back(space1);
   b4->spaces.emplace_back(space1);
 
-  b2->spaces.emplace_back(space1);
-  b5->spaces.emplace_back(space1);
-  b6->spaces.emplace_back(space1);
-  b7->spaces.emplace_back(space1);
+  b2->spaces.emplace_back(space2);
+  b5->spaces.emplace_back(space2);
+  b6->spaces.emplace_back(space2);
+  b7->spaces.emplace_back(space2);
+
+  NodePtr node1;
+  node1.reset(new Node());
+  node1->id = "n1";
+  node1->geom = reader.read("POINT (0.5 0.5)");
+
+  NodePtr node2;
+  node2.reset(new Node());
+  node2->id = "n2";
+  node2->geom = reader.read("POINT (1.5 0.5)");
+
+  EdgePtr edge;
+  edge.reset(new Edge());
+  edge->id = "e";
+  edge->geom = reader.read("LINESTRING (0.5 0.5, 1.5 0.5)");
+
+  node1->edges.emplace_back(edge);
+  node2->edges.emplace_back(edge);
+
+  edge->nodes.emplace_back(node1);
+  edge->nodes.emplace_back(node2);
+
+  space1->node = node1;
+  node1->space = space1;
+
+  space2->node = node2;
+  node2->space = space2;
+
+  edge->boundary = b2;
+  b2->edge = edge;
+
+  layer->dual_space->nodes.emplace_back(node1);
+  layer->dual_space->nodes.emplace_back(node2);
+
+  layer->dual_space->edges.emplace_back(edge);
 
   json j;
   to_json(j, layer);
