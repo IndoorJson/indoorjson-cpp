@@ -29,4 +29,8 @@ void from_json(const json &j, Node &node);
 
 void to_json(json &j, const CellSpace &space);
 
+void to_json(json &j, const geos::geom::Geometry::Ptr &geom);
+
+void from_json(const json &j, geos::geom::Geometry::Ptr &geom);
+
 }  // namespace indoor_json

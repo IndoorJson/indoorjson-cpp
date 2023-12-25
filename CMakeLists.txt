@@ -33,11 +33,15 @@ set(SOURCE_CODE
   src/serialization/geometry.cpp
 )
 
+### library
+
+add_library(${PROJECT_NAME} ${SOURCE_CODE})
 
 ### executable
 
-add_executable(main src/main.cpp ${SOURCE_CODE})
+add_executable(main src/main.cpp)
 target_link_libraries(main PRIVATE
+  ${PROJECT_NAME}
   GEOS::geos
   nlohmann_json::nlohmann_json
   nlohmann_json_schema_validator
@@ -55,6 +59,7 @@ foreach(CASE ${TEST_CASES})
   add_executable(${CASE} tests/${CASE}.cpp)
   add_test(NAME ${CASE} COMMAND ${CASE})
   target_link_libraries(${CASE}
+    ${PROJECT_NAME}
     GEOS::geos
     nlohmann_json::nlohmann_json
     nlohmann_json_schema_validator
