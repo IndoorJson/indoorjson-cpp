@@ -28,6 +28,7 @@ using namespace indoor_json;
 TEST(INDOOR_JSON, THEMATIC_LAYER) {
   ThematicLayerPtr layer;
   layer.reset(new ThematicLayer());
+  layer->id = "layer1";
   layer->primal_space.reset(new PrimalSpaceLayer());
   layer->dual_space.reset(new DualSpaceLayer());
 
@@ -144,7 +145,70 @@ TEST(INDOOR_JSON, THEMATIC_LAYER) {
 
   layer->dual_space->edges.emplace_back(edge);
 
+  ThematicLayerPtr layer2;
+  layer2.reset(new ThematicLayer());
+  layer2->id = "layer2";
+  layer2->primal_space.reset(new PrimalSpaceLayer());
+  layer2->dual_space.reset(new DualSpaceLayer());
+
+  CellSpacePtr space_2nd;
+  space_2nd.reset(new CellSpace());
+  space_2nd->id = "space_2nd";
+  space_2nd->geom = reader.read("POLYGON((-1 0, 0 0, 0 1, -1 1, -1 0))");
+  layer->primal_space->spaces.emplace_back(space_2nd);
+
+  layer2->primal_space->spaces.emplace_back(space_2nd);
+
+  CellBoundaryPtr b_2nd1;
+  b_2nd1.reset(new CellBoundary());
+  b_2nd1->id = "b_2nd1";
+  b_2nd1->geom = reader.read("LINESTRING (-1 0, 0 0)");
+
+  CellBoundaryPtr b_2nd2;
+  b_2nd2.reset(new CellBoundary());
+  b_2nd2->id = "b_2nd2";
+  b_2nd2->geom = reader.read("LINESTRING (0 0, 0 1)");
+
+  CellBoundaryPtr b_2nd3;
+  b_2nd3.reset(new CellBoundary());
+  b_2nd3->id = "b_2nd3";
+  b_2nd3->geom = reader.read("LINESTRING (0 1, -1 1)");
+
+  CellBoundaryPtr b_2nd4;
+  b_2nd4.reset(new CellBoundary());
+  b_2nd4->id = "b_2nd4";
+  b_2nd4->geom = reader.read("LINESTRING (-1 1, -1 0)");
+
+  layer2->primal_space->boundaries.emplace_back(b_2nd1);
+  layer2->primal_space->boundaries.emplace_back(b_2nd2);
+  layer2->primal_space->boundaries.emplace_back(b_2nd3);
+  layer2->primal_space->boundaries.emplace_back(b_2nd4);
+
+  NodePtr node_2nd;
+  node_2nd.reset(new Node());
+  node_2nd->id = "node_2nd";
+  node_2nd->geom = reader.read("POINT (-0.5 0.5)");
+
+  layer2->dual_space->nodes.emplace_back(node_2nd);
+
+  IndoorFeatures indoor_features;
+  indoor_features.layers.emplace_back(layer);
+  indoor_features.layers.emplace_back(layer2);
+
+  ConnectionPtr connection;
+  connection.reset(new Connection());
+  connection->comment = "this is a connection connect layer1 and layer2";
+  connection->layers.emplace_back(layer);
+  connection->layers.emplace_back(layer2);
+  connection->nodes.emplace_back(node1);
+  connection->nodes.emplace_back(node_2nd);
+  connection->spaces.emplace_back(space1);
+  connection->spaces.emplace_back(space_2nd);
+
+  indoor_features.connections.emplace_back(connection);
+
+
   json j;
-  to_json(j, layer);
+  to_json(j, indoor_features);
   LOG(INFO) << j.dump(2);
 }

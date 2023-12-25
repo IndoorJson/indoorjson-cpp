@@ -1,5 +1,5 @@
 /*
- * inter_layer_connection.h
+ * connection.h
  *
  * Copyright (c) 2023 IndoorJson
  *
@@ -18,13 +18,13 @@
 
 namespace indoor_json {
 
-struct InterLayerConnection : Feature {
+struct Connection : Feature {
   std::string comment;
   std::vector<ThematicLayerWPtr> layers;
   std::vector<CellSpaceWPtr> spaces;
   std::vector<NodeWPtr> nodes;
 };
 
-DEFINE_PTR(InterLayerConnection)
+DEFINE_PTR(Connection)
 
 }  // namespace indoor_json

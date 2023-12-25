@@ -60,10 +60,12 @@ void from_json(const json &j, EdgePtr &edge);
 void from_json(const json &j, EdgeWPtr &edge);
 
 // thematic layer
-void to_json(json &j, const ThematicLayer &edge);
-void to_json(json &j, const ThematicLayerPtr &edge);
-void from_json(const json &j, ThematicLayer &edge);
-void from_json(const json &j, ThematicLayerPtr &edge);
+void to_json(json &j, const ThematicLayer &layer);
+void to_json(json &j, const ThematicLayerPtr &layer);
+void to_json(json &j, const ThematicLayerWPtr &layer);
+void from_json(const json &j, ThematicLayer &layer);
+void from_json(const json &j, ThematicLayerPtr &layer);
+void from_json(const json &j, ThematicLayerWPtr &layer);
 
 // dual space layer
 void to_json(json &j, const DualSpaceLayer &layer);
@@ -76,6 +78,18 @@ void to_json(json &j, const PrimalSpaceLayer &layer);
 void to_json(json &j, const PrimalSpaceLayerPtr &layer);
 void from_json(const json &j, PrimalSpaceLayer &layer);
 void from_json(const json &j, PrimalSpaceLayerPtr &layer);
+
+// connection
+void to_json(json &j, const Connection &connection);
+void to_json(json &j, const ConnectionPtr &connection);
+void from_json(const json &j, Connection &connection);
+void from_json(const json &j, ConnectionPtr &connection);
+
+// indoor features
+void to_json(json &j, const IndoorFeatures &indoor_features);
+void to_json(json &j, const IndoorFeaturesPtr &indoor_features);
+void from_json(const json &j, IndoorFeatures &indoor_features);
+void from_json(const json &j, IndoorFeaturesPtr &indoor_features);
 
 // geometry
 void to_json(json &j, const geos::geom::Geometry::Ptr &geom);

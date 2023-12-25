@@ -12,7 +12,7 @@
 #include <vector>
 
 #include "feature.h"
-#include "inter_layer_connection.h"
+#include "connection.h"
 #include "ptr.h"
 #include "thematic_layer.h"
 
@@ -20,7 +20,7 @@ namespace indoor_json {
 
 struct IndoorFeatures : Feature {
   std::vector<ThematicLayerPtr> layers;
-  std::vector<InterLayerConnectionPtr> layer_connections;
+  std::vector<ConnectionPtr> connections;
 };
 
 DEFINE_PTR(IndoorFeatures)

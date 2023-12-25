@@ -1,10 +1,10 @@
 /*
- * File Name: cell_boundary.cpp
+ * File Name: cell_space.cpp
  *
  * Copyright (c) 2023 IndoorJson
  *
  * Author: Kunlin Yu <yukunlin@syriusrobotics.com>
- * Create Date: 2023/12/25
+ * Create Date: 2023/12/23
  *
  */
 #include <geos/io/WKTReader.h>
@@ -15,43 +15,42 @@ namespace indoor_json {
 
 using json = nlohmann::json;
 
-void to_json(json &j, const CellBoundary &boundary) {
-  to_json(j, static_cast<const Feature &>(boundary));
+void to_json(json &j, const CellSpace &space) {
+  json base;
+  to_json(base, static_cast<const Feature &>(space));
+  j.merge_patch(base);
 
-  if (boundary.geom != nullptr) {
+  if (space.geom != nullptr) {
     geos::io::WKTWriter writer;
-    j.push_back({"geom", writer.write(boundary.geom.get())});
+    j.push_back({"geom", writer.write(space.geom.get())});
   } else {
     j.push_back({"geom", nullptr});
   }
 
-  j.push_back({"edge", boundary.edge});
-
-  j.push_back({"spaces", boundary.spaces});
+  j.push_back({"node", space.node});
+  j.push_back({"boundaries", space.boundaries});
 }
 
-void to_json(json &j, const CellBoundaryPtr &boundary) {
-  to_json(j, *boundary.get());
-}
-void to_json(json &j, const CellBoundaryWPtr &boundary) {
-  if (auto s = boundary.lock())
+void to_json(json &j, const CellSpacePtr &space) { to_json(j, *space.get()); }
+void to_json(json &j, const CellSpaceWPtr &space) {
+  if (auto s = space.lock())
     j = s->id;
   else
     j = nullptr;
 }
 
-void from_json(const json &j, CellBoundary &boundary) {
-  from_json(j, static_cast<Feature &>(boundary));
+void from_json(const json &j, CellSpace &space) {
+  from_json(j, static_cast<Feature &>(space));
 
-  from_json(j.at("geom").get<std::string>(), boundary.geom);
+  from_json(j.at("geom").get<std::string>(), space.geom);
 
-  j.at("edge").get_to(boundary.edge);
+  j.at("boundaries").get_to(space.boundaries);
 
-  j.at("spaces").get_to(boundary.spaces);
+  j.at("node").get_to(space.node);
 }
-void from_json(const json &j, CellBoundaryPtr &boundary) {
-  from_json(j, *boundary.get());
+void from_json(const json &j, CellSpacePtr &space) {
+  from_json(j, *space.get());
 }
-void from_json(const json &j, CellBoundaryWPtr &boundary) {}
+void from_json(const json &j, CellSpaceWPtr &space) {}
 
 }  // namespace indoor_json

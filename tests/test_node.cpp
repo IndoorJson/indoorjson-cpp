@@ -42,6 +42,7 @@ TEST(INDOOR_JSON, NODE) {
   json j;
   to_json(j, node);
   std::string json_str = j.dump(2);
+  LOG(INFO) << json_str;
 
   std::string exp_str = R"_({
   "description": "description of node",

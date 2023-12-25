@@ -1,5 +1,5 @@
 /*
- * File Name: dual_space.cpp
+ * File Name: dual_space_layer.cpp
  *
  * Copyright (c) 2023 IndoorJson
  *
@@ -19,6 +19,10 @@ using json = nlohmann::json;
 void to_json(json &j, const DualSpaceLayer &layer) {
   j = {{"nodes", layer.nodes},
        {"edges", layer.edges}};
+
+  json base;
+  to_json(base, static_cast<const Feature &>(layer));
+  j.merge_patch(base);
 }
 void to_json(json &j, const DualSpaceLayerPtr &layer) {
   to_json(j, *layer.get());

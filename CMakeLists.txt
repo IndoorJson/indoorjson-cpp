@@ -43,6 +43,8 @@ set(SOURCE_CODE
   src/serialization/thematic_layer.cpp
   src/serialization/dual_space_layer.cpp
   src/serialization/primal_space_layer.cpp
+  src/serialization/connection.cpp
+  src/serialization/indoor_features.cpp
 )
 
 ### library

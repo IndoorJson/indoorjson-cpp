@@ -43,9 +43,18 @@ void to_json(json &j, const ThematicLayer &layer) {
   j = {{"theme", layer.theme},
        {"primal_space", layer.primal_space},
        {"dual_space", layer.dual_space}};
+  json base;
+  to_json(base, static_cast<const Feature &>(layer));
+  j.merge_patch(base);
 }
 void to_json(json &j, const ThematicLayerPtr &layer) {
   to_json(j, *layer.get());
+}
+void to_json(json &j, const ThematicLayerWPtr &layer) {
+  if (auto l = layer.lock())
+    j = l->id;
+  else
+    j = nullptr;
 }
 void from_json(const json &j, ThematicLayer &layer) {
   j.at("theme").get_to(layer.theme);
@@ -55,4 +64,9 @@ void from_json(const json &j, ThematicLayer &layer) {
 void from_json(const json &j, ThematicLayerPtr &layer) {
   from_json(j, *layer.get());
 }
+
+void from_json(const json& j, ThematicLayerWPtr& layer) {
+
+}
+
 }  // namespace indoor_json
