@@ -11,10 +11,17 @@ project(indoorjson-cpp)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+# json-schema-validator
 find_package(nlohmann_json_schema_validator REQUIRED)
+
+# libgeos
 find_package(GEOS REQUIRED)
+add_compile_definitions(USE_UNSTABLE_GEOS_CPP_API)
+
+# gtest
 find_package(GTest REQUIRED)
 
+# glog
 find_package(glog REQUIRED)
 if(WIN32)
     add_compile_definitions(GLOG_NO_ABBREVIATED_SEVERITIES)
