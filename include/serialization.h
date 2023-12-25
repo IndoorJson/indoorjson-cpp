@@ -27,6 +27,10 @@ void to_json(json &j, const Node &node);
 
 void from_json(const json &j, Node &node);
 
+void to_json(json &j, const Edge &edge);
+
+void from_json(const json &j, Edge &edge);
+
 void to_json(json &j, const CellSpace &space);
 
 void to_json(json &j, const geos::geom::Geometry::Ptr &geom);

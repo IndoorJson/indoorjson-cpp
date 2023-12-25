@@ -29,6 +29,7 @@ include_directories(${CMAKE_INCLUDE_PATH})
 set(SOURCE_CODE
   src/serialization/feature.cpp
   src/serialization/node.cpp
+  src/serialization/edge.cpp
   src/serialization/cell_space.cpp
   src/serialization/geometry.cpp
 )
@@ -54,6 +55,7 @@ enable_testing()
 set(TEST_CASES
   test_feature
   test_node
+  test_edge
 )
 
 foreach(CASE ${TEST_CASES})

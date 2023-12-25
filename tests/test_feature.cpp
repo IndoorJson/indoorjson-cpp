@@ -17,7 +17,7 @@
 
 using nlohmann::json;
 
-TEST(INDOOR_JSON, CASE1) {
+TEST(INDOOR_JSON, GEOMETRY) {
   std::string polygon_str =
       "POLYGON((30        10, 40 40, 20 40, 10 20, 30 10))";
   geos::io::WKTReader reader;

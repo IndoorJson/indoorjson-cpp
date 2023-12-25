@@ -15,7 +15,7 @@
 
 using nlohmann::json;
 
-TEST(INDOOR_JSON, CASE1) {
+TEST(INDOOR_JSON, NODE) {
   auto factory = geos::geom::GeometryFactory::create();
   std::initializer_list<geos::geom::Coordinate> coordList = {
       {1.0, 2.0}, {4.0, 5.0}, {7.0, 8.0}};
