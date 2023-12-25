@@ -73,35 +73,5 @@ int main(int argc, char* argv[]) {
     return EXIT_FAILURE;
   }
 
-  indoor_json::Node node;
-  node.id = "$123";
-  node.name = "my node";
-  node.description = "description of node";
-  node.external_ref = "https://indoorgml.org/";
-  node.envelope.reset(new geos::geom::Envelope(0.1, 1.04, 2.05, 3.06));
-  node.geom = factory->createLineString(cs);
-
-  indoor_json::EdgePtr edge;
-  edge.reset(new indoor_json::Edge());
-  edge->id = "@edge_id";
-  node.edges.emplace_back(indoor_json::EdgeWPtr(edge));
-
-  indoor_json::CellSpacePtr space;
-  space.reset(new indoor_json::CellSpace());
-  space->id = "$space_id";
-  node.space = indoor_json::CellSpaceWPtr(space);
-
-  json j;
-  to_json(j, node);
-  std::string json_str = j.dump(2);
-  LOG(INFO) << json_str << std::endl;
-
-  json j2 = json::parse(json_str);
-  indoor_json::Feature feature2 = j2.get<indoor_json::Feature>();
-
-  json j3;
-  to_json(j3, feature2);
-  LOG(INFO) << j3.dump(2) << std::endl;
-
   return EXIT_SUCCESS;
 }

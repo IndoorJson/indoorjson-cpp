@@ -9,9 +9,6 @@
  */
 #include <serialization.h>
 
-#include <geos/io/WKTReader.h>
-#include <geos/io/WKTWriter.h>
-
 namespace indoor_json {
 
 using json = nlohmann::json;
@@ -20,8 +17,9 @@ void to_json(json &j, const Node &node) {
   to_json(j, static_cast<const Feature &>(node));
 
   if (node.geom != nullptr) {
-    geos::io::WKTWriter writer;
-    j.push_back({"geom", writer.write(node.geom.get())});
+    json j_geom;
+    to_json(j_geom, node.geom);
+    j.push_back({"geom", j_geom});
   } else {
     j.push_back({"geom", nullptr});
   }
@@ -46,8 +44,7 @@ void from_json(const json &j, Node &node) {
 
   if (j.contains("geom")) {
     std::string wkt = j.at("geom").get<std::string>();
-    geos::io::WKTReader reader;
-    node.geom = reader.read(wkt);
+    from_json(wkt, node.geom);
   }
 }
 

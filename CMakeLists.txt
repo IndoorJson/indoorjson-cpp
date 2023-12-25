@@ -53,6 +53,7 @@ enable_testing()
 
 set(TEST_CASES
   test_feature
+  test_node
 )
 
 foreach(CASE ${TEST_CASES})
