@@ -1,5 +1,5 @@
 /*
- * File Name: test_thematic_layer.cpp
+ * File Name: test_serialization.cpp
  *
  * Copyright (c) 2023 IndoorJson
  *
@@ -17,15 +17,15 @@
 using nlohmann::json;
 using namespace indoor_json;
 
-// *----3-----*----7-----*
+// *---b3-----*---b7-----*
 // |          |          |
 // |          |          |
-// 4  space1  2  space2  6
+//b4  space1  b2 space2  b6
 // |          |          |
 // |          |          |
-// *----1-----*----5-----*
+// *---b1-----*---b5-----*
 
-TEST(INDOOR_JSON, THEMATIC_LAYER) {
+TEST(INDOOR_JSON, INDOOR_FEATURES) {
   ThematicLayerPtr layer;
   layer.reset(new ThematicLayer());
   layer->id = "layer1";

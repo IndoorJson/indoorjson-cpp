@@ -69,7 +69,7 @@ set(TEST_CASES
   test_feature
   test_node
   test_edge
-  test_thematic_layer
+  test_serialization
 )
 
 foreach(CASE ${TEST_CASES})
