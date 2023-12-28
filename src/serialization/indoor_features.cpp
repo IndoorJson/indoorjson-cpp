@@ -28,6 +28,7 @@ void from_json(const json& j, IndoorFeatures& indoor_features) {
   j.at("connections").get_to(indoor_features.connections);
 }
 void from_json(const json& j, IndoorFeaturesPtr& indoor_features) {
+  indoor_features = std::make_shared<IndoorFeatures>();
   from_json(j, *indoor_features.get());
 }
 

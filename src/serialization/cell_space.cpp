@@ -49,6 +49,7 @@ void from_json(const json &j, CellSpace &space) {
   j.at("node").get_to(space.node);
 }
 void from_json(const json &j, CellSpacePtr &space) {
+  space = std::make_shared<CellSpace>();
   from_json(j, *space.get());
 }
 void from_json(const json &j, CellSpaceWPtr &space) {}

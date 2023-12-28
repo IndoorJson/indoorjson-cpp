@@ -30,6 +30,7 @@ void from_json(const json &j, PrimalSpaceLayer &layer) {
   j.at("boundaries").get_to(layer.boundaries);
 }
 void from_json(const json &j, PrimalSpaceLayerPtr &layer) {
+  layer = std::make_shared<PrimalSpaceLayer>();
   from_json(j, *layer.get());
 }
 

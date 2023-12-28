@@ -51,7 +51,10 @@ void from_json(const json &j, Edge &edge) {
   j.at("boundary").get_to(edge.boundary);
 }
 
-void from_json(const json &j, EdgePtr &edge) { from_json(j, *edge.get()); }
+void from_json(const json &j, EdgePtr &edge) {
+  edge = std::make_shared<Edge>();
+  from_json(j, *edge.get());
+}
 void from_json(const json &j, EdgeWPtr &edge) {}
 
 }  // namespace indoor_json

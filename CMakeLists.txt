@@ -11,6 +11,8 @@ project(indoorjson-cpp)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall --coverage")
+
 # json-schema-validator
 find_package(nlohmann_json_schema_validator REQUIRED)
 
@@ -70,7 +72,12 @@ set(TEST_CASES
   test_node
   test_edge
   test_serialization
+  test_deserialization
 )
+
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/tests/resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+set(TEST_RESOURCES "${CMAKE_CURRENT_BINARY_DIR}/resources")
+add_definitions(-DTEST_RESOURCES="${TEST_RESOURCES}")
 
 foreach(CASE ${TEST_CASES})
   add_executable(${CASE} tests/${CASE}.cpp)

@@ -1,0 +1,205 @@
+{
+  "connections": [
+    {
+      "comment": "this is a connection connect layer1 and layer2",
+      "id": "",
+      "layers": [
+        "layer1",
+        "layer2"
+      ],
+      "nodes": [
+        "n1",
+        "node_2nd"
+      ],
+      "spaces": [
+        "space1",
+        "space_2nd"
+      ]
+    }
+  ],
+  "id": "",
+  "layers": [
+    {
+      "dual_space": {
+        "edges": [
+          {
+            "boundary": "b2",
+            "geom": "LINESTRING (0.5 0.5, 1.5 0.5)",
+            "id": "e",
+            "nodes": [
+              "n1",
+              "n2"
+            ],
+            "weight": 0.0
+          }
+        ],
+        "id": "",
+        "nodes": [
+          {
+            "edges": [
+              "e"
+            ],
+            "geom": "POINT (0.5 0.5)",
+            "id": "n1",
+            "space": "space1"
+          },
+          {
+            "edges": [
+              "e"
+            ],
+            "geom": "POINT (1.5 0.5)",
+            "id": "n2",
+            "space": "space2"
+          }
+        ]
+      },
+      "id": "layer1",
+      "primal_space": {
+        "boundaries": [
+          {
+            "edge": null,
+            "geom": "LINESTRING (0 0, 1 0)",
+            "id": "b1",
+            "spaces": [
+              "space1"
+            ]
+          },
+          {
+            "edge": "e",
+            "geom": "LINESTRING (1 0, 1 1)",
+            "id": "b2",
+            "spaces": [
+              "space1",
+              "space2"
+            ]
+          },
+          {
+            "edge": null,
+            "geom": "LINESTRING (1 1, 0 1)",
+            "id": "b3",
+            "spaces": [
+              "space1"
+            ]
+          },
+          {
+            "edge": null,
+            "geom": "LINESTRING (0 1, 0 0)",
+            "id": "b4",
+            "spaces": [
+              "space1"
+            ]
+          },
+          {
+            "edge": null,
+            "geom": "LINESTRING (1 0, 2 0)",
+            "id": "b5",
+            "spaces": [
+              "space2"
+            ]
+          },
+          {
+            "edge": null,
+            "geom": "LINESTRING (2 0, 2 1)",
+            "id": "b6",
+            "spaces": [
+              "space2"
+            ]
+          },
+          {
+            "edge": null,
+            "geom": "LINESTRING (2 1, 1 1)",
+            "id": "b7",
+            "spaces": [
+              "space2"
+            ]
+          }
+        ],
+        "id": "",
+        "spaces": [
+          {
+            "boundaries": [
+              "b1",
+              "b2",
+              "b3",
+              "b4"
+            ],
+            "geom": "POLYGON ((0 0, 1 0, 1 1, 0 1, 0 0))",
+            "id": "space1",
+            "node": "n1"
+          },
+          {
+            "boundaries": [
+              "b2",
+              "b5",
+              "b6",
+              "b7"
+            ],
+            "geom": "POLYGON ((1 0, 2 0, 2 1, 1 1, 1 0))",
+            "id": "space2",
+            "node": "n2"
+          },
+          {
+            "boundaries": [],
+            "geom": "POLYGON ((-1 0, 0 0, 0 1, -1 1, -1 0))",
+            "id": "space_2nd",
+            "node": null
+          }
+        ]
+      },
+      "theme": "Topographic"
+    },
+    {
+      "dual_space": {
+        "edges": [],
+        "id": "",
+        "nodes": [
+          {
+            "edges": [],
+            "geom": "POINT (-0.5 0.5)",
+            "id": "node_2nd",
+            "space": null
+          }
+        ]
+      },
+      "id": "layer2",
+      "primal_space": {
+        "boundaries": [
+          {
+            "edge": null,
+            "geom": "LINESTRING (-1 0, 0 0)",
+            "id": "b_2nd1",
+            "spaces": []
+          },
+          {
+            "edge": null,
+            "geom": "LINESTRING (0 0, 0 1)",
+            "id": "b_2nd2",
+            "spaces": []
+          },
+          {
+            "edge": null,
+            "geom": "LINESTRING (0 1, -1 1)",
+            "id": "b_2nd3",
+            "spaces": []
+          },
+          {
+            "edge": null,
+            "geom": "LINESTRING (-1 1, -1 0)",
+            "id": "b_2nd4",
+            "spaces": []
+          }
+        ],
+        "id": "",
+        "spaces": [
+          {
+            "boundaries": [],
+            "geom": "POLYGON ((-1 0, 0 0, 0 1, -1 1, -1 0))",
+            "id": "space_2nd",
+            "node": null
+          }
+        ]
+      },
+      "theme": "Topographic"
+    }
+  ]
+}

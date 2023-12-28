@@ -50,7 +50,10 @@ void from_json(const json &j, Node &node) {
 
 }
 
-void from_json(const json &j, NodePtr &node) { from_json(j, *node.get()); }
+void from_json(const json &j, NodePtr &node) {
+  node = std::make_shared<Node>();
+  from_json(j, *node.get());
+}
 
 void from_json(const json &j, NodeWPtr &node) {}
 

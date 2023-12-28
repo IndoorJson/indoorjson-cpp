@@ -37,6 +37,7 @@ void from_json(const json &j, Connection &connection) {
 }
 
 void from_json(const json &j, ConnectionPtr &connection) {
+  connection = std::make_shared<Connection>();
   from_json(j, *connection.get());
 }
 }  // namespace indoor_json

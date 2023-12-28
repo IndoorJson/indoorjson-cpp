@@ -16,28 +16,12 @@ namespace indoor_json {
 
 using json = nlohmann::json;
 
-void to_json(json &j, const Theme &theme) {
-  switch (theme) {
-    case Theme::Topographic:
-      j = "Topographic";
-      break;
-    case Theme::Sensor:
-      j = "Sensor";
-      break;
-    case Theme::Logical:
-      j = "Logical";
-      break;
-    case Theme::Unknown:
-      j = "Unknown";
-      break;
-    case Theme::Property:
-      j = "Property";
-      break;
-    case Theme::Other:
-      j = "Other";
-      break;
-  }
-}
+NLOHMANN_JSON_SERIALIZE_ENUM(Theme, {{Theme::Topographic, "Topographic"},
+                                     {Theme::Sensor, "Sensor"},
+                                     {Theme::Logical, "Logical"},
+                                     {Theme::Unknown, "Unknown"},
+                                     {Theme::Property, "Property"},
+                                     {Theme::Other, "Other"}})
 
 void to_json(json &j, const ThematicLayer &layer) {
   j = {{"theme", layer.theme},
@@ -62,11 +46,10 @@ void from_json(const json &j, ThematicLayer &layer) {
   j.at("dual_space").get_to(layer.dual_space);
 }
 void from_json(const json &j, ThematicLayerPtr &layer) {
+  layer = std::make_shared<ThematicLayer>();
   from_json(j, *layer.get());
 }
 
-void from_json(const json& j, ThematicLayerWPtr& layer) {
-
-}
+void from_json(const json &j, ThematicLayerWPtr &layer) {}
 
 }  // namespace indoor_json

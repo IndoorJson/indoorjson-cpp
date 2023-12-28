@@ -32,6 +32,7 @@ void from_json(const json &j, DualSpaceLayer &layer) {
   j.at("edges").get_to(layer.edges);
 }
 void from_json(const json &j, DualSpaceLayerPtr &layer) {
+  layer = std::make_shared<DualSpaceLayer>();
   from_json(j, *layer.get());
 }
 }  // namespace indoor_json

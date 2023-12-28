@@ -51,6 +51,7 @@ void from_json(const json &j, CellBoundary &boundary) {
   j.at("spaces").get_to(boundary.spaces);
 }
 void from_json(const json &j, CellBoundaryPtr &boundary) {
+  boundary = std::make_shared<CellBoundary>();
   from_json(j, *boundary.get());
 }
 void from_json(const json &j, CellBoundaryWPtr &boundary) {}
