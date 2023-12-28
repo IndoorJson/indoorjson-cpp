@@ -123,6 +123,7 @@ conan install . --output-folder=out/build --build=missing
 5. Finally trigger configuration and building using VS GUI.
 
 # example
+```text
  *---b3-----*---b7-----*
  |          |          |
  |          |          |
@@ -130,7 +131,7 @@ b4  space1  b2 space2  b6
  |          |          |
  |          |          |
  *---b1-----*---b5-----*
- 
+```
 ```json
 {
   "connections": [
