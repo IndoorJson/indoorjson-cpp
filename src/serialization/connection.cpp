@@ -22,10 +22,6 @@ void to_json(json &j, const Connection &connection) {
   to_json(j, static_cast<const Feature &>(connection));
 }
 
-void to_json(json &j, const ConnectionPtr &connection) {
-  to_json(j, *connection.get());
-}
-
 void from_json(const json &j, Connection &connection) {
   j.at("comment").get_to(connection.comment);
   j.at("layers").get_to(connection.layers);
@@ -34,8 +30,4 @@ void from_json(const json &j, Connection &connection) {
   from_json(j, static_cast<Feature &>(connection));
 }
 
-void from_json(const json &j, ConnectionPtr &connection) {
-  connection = std::make_shared<Connection>();
-  from_json(j, *connection.get());
-}
 }  // namespace indoor_json

@@ -18,27 +18,11 @@ void to_json(json &j, const Node &node) {
   to_json(j, static_cast<const Feature &>(node));
 }
 
-void to_json(json &j, const NodePtr &node) { to_json(j, *node.get()); }
-
-void to_json(json &j, const NodeWPtr &node) {
-  if (auto n = node.lock())
-    j = n->id;
-  else
-    j = nullptr;
-}
-
 void from_json(const json &j, Node &node) {
   j.at("geom").get_to(node.geom);
   j.at("space").get_to(node.space);
   j.at("edges").get_to(node.edges);
   from_json(j, static_cast<Feature &>(node));
 }
-
-void from_json(const json &j, NodePtr &node) {
-  node = std::make_shared<Node>();
-  from_json(j, *node.get());
-}
-
-void from_json(const json &j, NodeWPtr &node) {}
 
 }  // namespace indoor_json

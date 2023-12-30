@@ -21,16 +21,11 @@ void to_json(json &j, const DualSpaceLayer &layer) {
        {"edges", layer.edges}};
   to_json(j, static_cast<const Feature &>(layer));
 }
-void to_json(json &j, const DualSpaceLayerPtr &layer) {
-  to_json(j, *layer.get());
-}
+
 void from_json(const json &j, DualSpaceLayer &layer) {
   j.at("nodes").get_to(layer.nodes);
   j.at("edges").get_to(layer.edges);
   from_json(j, static_cast<Feature &>(layer));
 }
-void from_json(const json &j, DualSpaceLayerPtr &layer) {
-  layer = std::make_shared<DualSpaceLayer>();
-  from_json(j, *layer.get());
-}
+
 }  // namespace indoor_json

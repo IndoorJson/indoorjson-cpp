@@ -23,73 +23,41 @@ namespace indoor_json {
 void to_json(json &j, const Feature &feature);
 void from_json(const json &j, Feature &feature);
 
-// cell space
-void to_json(json &j, const CellSpace &space);
-void to_json(json &j, const CellSpacePtr &space);
-void to_json(json &j, const CellSpaceWPtr &space);
-
-void from_json(const json &j, CellSpace &space);
-void from_json(const json &j, CellSpacePtr &space);
-void from_json(const json &j, CellSpaceWPtr &space);
-
-// cell boundary
-void to_json(json &j, const CellBoundary &boundary);
-void to_json(json &j, const CellBoundaryPtr &boundary);
-void to_json(json &j, const CellBoundaryWPtr &boundary);
-
-void from_json(const json &j, CellBoundary &boundary);
-void from_json(const json &j, CellBoundaryPtr &boundary);
-void from_json(const json &j, CellBoundaryWPtr &boundary);
-
-// node
-void to_json(json &j, const Node &node);
-void to_json(json &j, const NodePtr &node);
-void to_json(json &j, const NodeWPtr &node);
-
-void from_json(const json &j, Node &node);
-void from_json(const json &j, NodePtr &node);
-void from_json(const json &j, NodeWPtr &node);
-
-// edge
-void to_json(json &j, const Edge &edge);
-void to_json(json &j, const EdgePtr &edge);
-void to_json(json &j, const EdgeWPtr &edge);
-
-void from_json(const json &j, Edge &edge);
-void from_json(const json &j, EdgePtr &edge);
-void from_json(const json &j, EdgeWPtr &edge);
-
-// thematic layer
-void to_json(json &j, const ThematicLayer &layer);
-void to_json(json &j, const ThematicLayerPtr &layer);
-void to_json(json &j, const ThematicLayerWPtr &layer);
-void from_json(const json &j, ThematicLayer &layer);
-void from_json(const json &j, ThematicLayerPtr &layer);
-void from_json(const json &j, ThematicLayerWPtr &layer);
-
-// dual space layer
-void to_json(json &j, const DualSpaceLayer &layer);
-void to_json(json &j, const DualSpaceLayerPtr &layer);
-void from_json(const json &j, DualSpaceLayer &layer);
-void from_json(const json &j, DualSpaceLayerPtr &layer);
-
-// primal space layer
-void to_json(json &j, const PrimalSpaceLayer &layer);
-void to_json(json &j, const PrimalSpaceLayerPtr &layer);
-void from_json(const json &j, PrimalSpaceLayer &layer);
-void from_json(const json &j, PrimalSpaceLayerPtr &layer);
+// indoor features
+void to_json(json &j, const IndoorFeatures &indoor_features);
+void from_json(const json &j, IndoorFeatures &indoor_features);
 
 // connection
 void to_json(json &j, const Connection &connection);
-void to_json(json &j, const ConnectionPtr &connection);
 void from_json(const json &j, Connection &connection);
-void from_json(const json &j, ConnectionPtr &connection);
 
-// indoor features
-void to_json(json &j, const IndoorFeatures &indoor_features);
-void to_json(json &j, const IndoorFeaturesPtr &indoor_features);
-void from_json(const json &j, IndoorFeatures &indoor_features);
-void from_json(const json &j, IndoorFeaturesPtr &indoor_features);
+// thematic layer
+void to_json(json &j, const ThematicLayer &layer);
+void from_json(const json &j, ThematicLayer &layer);
+
+// primal space layer
+void to_json(json &j, const PrimalSpaceLayer &layer);
+void from_json(const json &j, PrimalSpaceLayer &layer);
+
+// dual space layer
+void to_json(json &j, const DualSpaceLayer &layer);
+void from_json(const json &j, DualSpaceLayer &layer);
+
+// cell space
+void to_json(json &j, const CellSpace &space);
+void from_json(const json &j, CellSpace &space);
+
+// cell boundary
+void to_json(json &j, const CellBoundary &boundary);
+void from_json(const json &j, CellBoundary &boundary);
+
+// node
+void to_json(json &j, const Node &node);
+void from_json(const json &j, Node &node);
+
+// edge
+void to_json(json &j, const Edge &edge);
+void from_json(const json &j, Edge &edge);
 
 }  // namespace indoor_json
 
@@ -111,6 +79,31 @@ struct adl_serializer<geos::geom::Geometry::Ptr> {
     std::string wkt_str = j.get<std::string>();
     geos::io::WKTReader reader;
     geom = reader.read(wkt_str);
+  }
+};
+
+template <typename T>
+struct adl_serializer<std::shared_ptr<T>> {
+  static void to_json(json &j, const std::shared_ptr<T> &ptr) {
+    indoor_json::to_json(j, *ptr.get());
+  }
+
+  static void from_json(const json &j, std::shared_ptr<T> &ptr) {
+    ptr = std::make_shared<T>();
+    indoor_json::from_json(j, *ptr.get());
+  }
+};
+
+template <typename T>
+struct adl_serializer<std::weak_ptr<T>> {
+  static void to_json(json &j, const std::weak_ptr<T> &wptr) {
+    if (auto feature = wptr.lock())
+      j = feature->id;
+    else
+      j = nullptr;
+  }
+
+  static void from_json(const json &j, std::weak_ptr<T> &wptr) {
   }
 };
 

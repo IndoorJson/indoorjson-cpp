@@ -22,24 +22,11 @@ void to_json(json &j, const CellSpace &space) {
   to_json(j, static_cast<const Feature &>(space));
 }
 
-void to_json(json &j, const CellSpacePtr &space) { to_json(j, *space.get()); }
-void to_json(json &j, const CellSpaceWPtr &space) {
-  if (auto s = space.lock())
-    j = s->id;
-  else
-    j = nullptr;
-}
-
 void from_json(const json &j, CellSpace &space) {
   j.at("geom").get_to(space.geom);
   j.at("boundaries").get_to(space.boundaries);
   j.at("node").get_to(space.node);
   from_json(j, static_cast<Feature &>(space));
 }
-void from_json(const json &j, CellSpacePtr &space) {
-  space = std::make_shared<CellSpace>();
-  from_json(j, *space.get());
-}
-void from_json(const json &j, CellSpaceWPtr &space) {}
 
 }  // namespace indoor_json

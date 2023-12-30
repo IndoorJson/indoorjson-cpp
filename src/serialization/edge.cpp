@@ -21,14 +21,6 @@ void to_json(json &j, const Edge &edge) {
   to_json(j, static_cast<const Feature &>(edge));
 }
 
-void to_json(json &j, const EdgePtr &edge) { to_json(j, *edge.get()); }
-void to_json(json &j, const EdgeWPtr &edge) {
-  if (auto e = edge.lock())
-    j = e->id;
-  else
-    j = nullptr;
-}
-
 void from_json(const json &j, Edge &edge) {
   j.at("geom").get_to(edge.geom);
   j.at("weight").get_to(edge.weight);
@@ -36,11 +28,5 @@ void from_json(const json &j, Edge &edge) {
   j.at("boundary").get_to(edge.boundary);
   from_json(j, static_cast<Feature &>(edge));
 }
-
-void from_json(const json &j, EdgePtr &edge) {
-  edge = std::make_shared<Edge>();
-  from_json(j, *edge.get());
-}
-void from_json(const json &j, EdgeWPtr &edge) {}
 
 }  // namespace indoor_json
