@@ -7,6 +7,7 @@
  * Create Date: 2023/12/23
  *
  */
+#include <glog/logging.h>
 #include <serialization.h>
 
 namespace indoor_json {
@@ -25,7 +26,7 @@ void to_json(json &j, const Feature &feature) {
 }
 
 void from_json(const json &j, Feature &feature) {
-  j.at("id").get_to(feature.id);
+  if (j.contains("id")) j.at("id").get_to(feature.id);
   if (j.contains("name")) j.at("name").get_to(feature.name);
   if (j.contains("description"))
     j.at("description").get_to(feature.description);

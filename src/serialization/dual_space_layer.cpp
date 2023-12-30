@@ -30,6 +30,7 @@ void to_json(json &j, const DualSpaceLayerPtr &layer) {
 void from_json(const json &j, DualSpaceLayer &layer) {
   j.at("nodes").get_to(layer.nodes);
   j.at("edges").get_to(layer.edges);
+  from_json(j, static_cast<Feature &>(layer));
 }
 void from_json(const json &j, DualSpaceLayerPtr &layer) {
   layer = std::make_shared<DualSpaceLayer>();

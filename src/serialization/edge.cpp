@@ -41,14 +41,11 @@ void to_json(json &j, const EdgeWPtr &edge) {
 
 void from_json(const json &j, Edge &edge) {
   from_json(j, static_cast<Feature &>(edge));
-
   from_json(j.at("geom").get<std::string>(), edge.geom);
-
   j.at("weight").get_to(edge.weight);
-
   j.at("nodes").get_to(edge.nodes);
-
   j.at("boundary").get_to(edge.boundary);
+  from_json(j, static_cast<Feature &>(edge));
 }
 
 void from_json(const json &j, EdgePtr &edge) {

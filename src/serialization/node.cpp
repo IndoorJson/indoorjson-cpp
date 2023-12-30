@@ -41,13 +41,10 @@ void to_json(json &j, const NodeWPtr &node) {
 
 void from_json(const json &j, Node &node) {
   from_json(j, static_cast<Feature &>(node));
-
   from_json(j.at("geom").get<std::string>(), node.geom);
-
   j.at("space").get_to(node.space);
-
   j.at("edges").get_to(node.edges);
-
+  from_json(j, static_cast<Feature &>(node));
 }
 
 void from_json(const json &j, NodePtr &node) {

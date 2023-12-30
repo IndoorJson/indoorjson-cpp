@@ -44,6 +44,7 @@ void from_json(const json &j, ThematicLayer &layer) {
   j.at("theme").get_to(layer.theme);
   j.at("primal_space").get_to(layer.primal_space);
   j.at("dual_space").get_to(layer.dual_space);
+  from_json(j, static_cast<Feature &>(layer));
 }
 void from_json(const json &j, ThematicLayerPtr &layer) {
   layer = std::make_shared<ThematicLayer>();

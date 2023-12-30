@@ -28,6 +28,7 @@ void to_json(json &j, const PrimalSpaceLayerPtr &layer) {
 void from_json(const json &j, PrimalSpaceLayer &layer) {
   j.at("spaces").get_to(layer.spaces);
   j.at("boundaries").get_to(layer.boundaries);
+  from_json(j, static_cast<Feature &>(layer));
 }
 void from_json(const json &j, PrimalSpaceLayerPtr &layer) {
   layer = std::make_shared<PrimalSpaceLayer>();

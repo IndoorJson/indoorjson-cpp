@@ -43,12 +43,10 @@ void to_json(json &j, const CellBoundaryWPtr &boundary) {
 
 void from_json(const json &j, CellBoundary &boundary) {
   from_json(j, static_cast<Feature &>(boundary));
-
   from_json(j.at("geom").get<std::string>(), boundary.geom);
-
   j.at("edge").get_to(boundary.edge);
-
   j.at("spaces").get_to(boundary.spaces);
+  from_json(j, static_cast<Feature &>(boundary));
 }
 void from_json(const json &j, CellBoundaryPtr &boundary) {
   boundary = std::make_shared<CellBoundary>();

@@ -22,29 +22,29 @@ TEST(INDOOR_JSON, DESERIALIZATION) {
   std::string file_path = TEST_RESOURCES "/case1.json";
   LOG(INFO) << file_path;
 
-  std::ifstream file_stream(file_path);
+  std::ifstream fin(file_path);
 
-  if (file_stream.is_open()) {
-    std::string file_content((std::istreambuf_iterator<char>(file_stream)),
-                             std::istreambuf_iterator<char>());
+  ASSERT_TRUE(fin.is_open());
 
-    file_stream.close();
+  std::string content((std::istreambuf_iterator<char>(fin)),
+                      std::istreambuf_iterator<char>());
 
-    try {
-      json j;
-      j = json::parse(file_content);
-      LOG(INFO) << "parse to json dom";
+  fin.close();
 
-      auto indoor_features = j.get<IndoorFeatures>();
+  try {
+    json j;
+    j = json::parse(content);
+    LOG(INFO) << "parse to json dom";
 
-      LOG(INFO) << "get features";
-      LOG(INFO) << indoor_features.connections[0]->comment;
+    auto indoor_features = j.get<IndoorFeatures>();
 
-    } catch (json::exception &e) {
-      LOG(ERROR) << "parse error: " << e.what();
-    }
+    LOG(INFO) << "get features";
+    LOG(INFO) << indoor_features.connections[0]->comment;
 
-  } else {
-    LOG(ERROR) << "Error opening the file.";
+    json j2 = indoor_features;
+    LOG(INFO) << j2.dump(2);
+
+  } catch (json::exception &e) {
+    LOG(ERROR) << "parse error: " << e.what();
   }
 }

@@ -34,6 +34,7 @@ void from_json(const json &j, Connection &connection) {
   j.at("layers").get_to(connection.layers);
   j.at("spaces").get_to(connection.spaces);
   j.at("nodes").get_to(connection.nodes);
+  from_json(j, static_cast<Feature &>(connection));
 }
 
 void from_json(const json &j, ConnectionPtr &connection) {
