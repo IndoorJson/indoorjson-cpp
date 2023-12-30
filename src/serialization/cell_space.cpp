@@ -40,7 +40,6 @@ void to_json(json &j, const CellSpaceWPtr &space) {
 }
 
 void from_json(const json &j, CellSpace &space) {
-  from_json(j, static_cast<Feature &>(space));
   from_json(j.at("geom").get<std::string>(), space.geom);
   j.at("boundaries").get_to(space.boundaries);
   j.at("node").get_to(space.node);
