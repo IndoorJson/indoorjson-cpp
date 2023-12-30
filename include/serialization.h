@@ -61,9 +61,9 @@ void from_json(const json &j, Edge &edge);
 
 }  // namespace indoor_json
 
-
 #include <geos/io/WKTReader.h>
 #include <geos/io/WKTWriter.h>
+#include <id_lookup.h>
 
 NLOHMANN_JSON_NAMESPACE_BEGIN
 
@@ -91,6 +91,8 @@ struct adl_serializer<std::shared_ptr<T>> {
   static void from_json(const json &j, std::shared_ptr<T> &ptr) {
     ptr = std::make_shared<T>();
     indoor_json::from_json(j, *ptr.get());
+
+    indoor_json::IdLookup<T>::Ins().Register(ptr->id, ptr, j);
   }
 };
 
@@ -103,8 +105,7 @@ struct adl_serializer<std::weak_ptr<T>> {
       j = nullptr;
   }
 
-  static void from_json(const json &j, std::weak_ptr<T> &wptr) {
-  }
+  static void from_json(const json &j, std::weak_ptr<T> &wptr) {}
 };
 
 NLOHMANN_JSON_NAMESPACE_END

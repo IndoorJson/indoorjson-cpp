@@ -2,7 +2,7 @@
   "connections": [
     {
       "comment": "this is a connection connect layer1 and layer2",
-      "id": "",
+      "id": "connection1",
       "layers": [
         "layer1",
         "layer2"
@@ -17,7 +17,7 @@
       ]
     }
   ],
-  "id": "",
+  "id": "indoor_features1",
   "layers": [
     {
       "dual_space": {
@@ -33,7 +33,7 @@
             "weight": 0.0
           }
         ],
-        "id": "",
+        "id": "dual_space1",
         "nodes": [
           {
             "edges": [

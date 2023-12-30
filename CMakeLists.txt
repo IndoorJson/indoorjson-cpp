@@ -46,6 +46,7 @@ set(SOURCE_CODE
   src/serialization/primal_space_layer.cpp
   src/serialization/connection.cpp
   src/serialization/indoor_features.cpp
+  src/id_lookup.cpp
 )
 
 ### library
