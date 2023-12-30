@@ -24,14 +24,13 @@ TEST(INDOOR_JSON, GEOMETRY) {
   auto geom = reader.read(polygon_str);
 
   json j;
-  indoor_json::to_json(j, geom);
+  j = geom;
   std::string dump_json = j.dump();
   EXPECT_EQ("\"POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))\"", dump_json);
 
   json j2 = json::parse(dump_json);
-  // geos::geom::Geometry::Ptr geom2 = j2.get<geos::geom::Geometry::Ptr>();
-  geos::geom::Geometry::Ptr geom2;
-  indoor_json::from_json(j2, geom2);
+  geos::geom::Geometry::Ptr geom2 = j2.get<geos::geom::Geometry::Ptr>();
+  j2 = geom2;
 
   geos::io::WKTWriter writer;
   EXPECT_EQ("POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))",

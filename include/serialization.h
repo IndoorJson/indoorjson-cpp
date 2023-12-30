@@ -91,8 +91,27 @@ void to_json(json &j, const IndoorFeaturesPtr &indoor_features);
 void from_json(const json &j, IndoorFeatures &indoor_features);
 void from_json(const json &j, IndoorFeaturesPtr &indoor_features);
 
-// geometry
-void to_json(json &j, const geos::geom::Geometry::Ptr &geom);
-void from_json(const json &j, geos::geom::Geometry::Ptr &geom);
-
 }  // namespace indoor_json
+
+
+#include <geos/io/WKTReader.h>
+#include <geos/io/WKTWriter.h>
+
+NLOHMANN_JSON_NAMESPACE_BEGIN
+
+template <>
+struct adl_serializer<geos::geom::Geometry::Ptr> {
+  static void to_json(json &j, const geos::geom::Geometry::Ptr &geom) {
+    geos::io::WKTWriter writer;
+    std::string wkt_str = writer.write(geom.get());
+    j = wkt_str;
+  }
+
+  static void from_json(const json &j, geos::geom::Geometry::Ptr &geom) {
+    std::string wkt_str = j.get<std::string>();
+    geos::io::WKTReader reader;
+    geom = reader.read(wkt_str);
+  }
+};
+
+NLOHMANN_JSON_NAMESPACE_END

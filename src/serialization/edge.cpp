@@ -16,16 +16,8 @@ using json = nlohmann::json;
 void to_json(json &j, const Edge &edge) {
   j = {{"boundary", edge.boundary},
        {"nodes", edge.nodes},
-       {"weight", edge.weight}};
-
-  if (edge.geom != nullptr) {
-    json j_geom;
-    to_json(j_geom, edge.geom);
-    j.push_back({"geom", j_geom});
-  } else {
-    j.push_back({"geom", nullptr});
-  }
-
+       {"weight", edge.weight},
+       {"geom", edge.geom}};
   to_json(j, static_cast<const Feature &>(edge));
 }
 
@@ -38,7 +30,7 @@ void to_json(json &j, const EdgeWPtr &edge) {
 }
 
 void from_json(const json &j, Edge &edge) {
-  from_json(j.at("geom").get<std::string>(), edge.geom);
+  j.at("geom").get_to(edge.geom);
   j.at("weight").get_to(edge.weight);
   j.at("nodes").get_to(edge.nodes);
   j.at("boundary").get_to(edge.boundary);

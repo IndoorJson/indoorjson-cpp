@@ -41,7 +41,6 @@ set(SOURCE_CODE
   src/serialization/cell_boundary.cpp
   src/serialization/node.cpp
   src/serialization/edge.cpp
-  src/serialization/geometry.cpp
   src/serialization/thematic_layer.cpp
   src/serialization/dual_space_layer.cpp
   src/serialization/primal_space_layer.cpp
