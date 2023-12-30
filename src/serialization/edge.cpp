@@ -14,9 +14,9 @@ namespace indoor_json {
 using json = nlohmann::json;
 
 void to_json(json &j, const Edge &edge) {
-  json base;
-  to_json(base, static_cast<const Feature &>(edge));
-  j.merge_patch(base);
+  j = {{"boundary", edge.boundary},
+       {"nodes", edge.nodes},
+       {"weight", edge.weight}};
 
   if (edge.geom != nullptr) {
     json j_geom;
@@ -26,9 +26,7 @@ void to_json(json &j, const Edge &edge) {
     j.push_back({"geom", nullptr});
   }
 
-  j.push_back({"boundary", edge.boundary});
-  j.push_back({"nodes", edge.nodes});
-  j.push_back({"weight", edge.weight});
+  to_json(j, static_cast<const Feature &>(edge));
 }
 
 void to_json(json &j, const EdgePtr &edge) { to_json(j, *edge.get()); }

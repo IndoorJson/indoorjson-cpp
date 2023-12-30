@@ -19,10 +19,7 @@ using json = nlohmann::json;
 void to_json(json &j, const DualSpaceLayer &layer) {
   j = {{"nodes", layer.nodes},
        {"edges", layer.edges}};
-
-  json base;
-  to_json(base, static_cast<const Feature &>(layer));
-  j.merge_patch(base);
+  to_json(j, static_cast<const Feature &>(layer));
 }
 void to_json(json &j, const DualSpaceLayerPtr &layer) {
   to_json(j, *layer.get());

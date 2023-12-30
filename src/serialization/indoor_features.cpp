@@ -16,9 +16,7 @@ using json = nlohmann::json;
 void to_json(json& j, const IndoorFeatures& indoor_features) {
   j = {{"layers", indoor_features.layers},
        {"connections", indoor_features.connections}};
-  json base;
-  to_json(base, static_cast<const Feature&>(indoor_features));
-  j.merge_patch(base);
+  to_json(j, static_cast<const Feature&>(indoor_features));
 }
 void to_json(json& j, const IndoorFeaturesPtr& indoor_features) {
   to_json(j, *indoor_features.get());

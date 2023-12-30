@@ -27,9 +27,7 @@ void to_json(json &j, const ThematicLayer &layer) {
   j = {{"theme", layer.theme},
        {"primal_space", layer.primal_space},
        {"dual_space", layer.dual_space}};
-  json base;
-  to_json(base, static_cast<const Feature &>(layer));
-  j.merge_patch(base);
+  to_json(j, static_cast<const Feature &>(layer));
 }
 void to_json(json &j, const ThematicLayerPtr &layer) {
   to_json(j, *layer.get());

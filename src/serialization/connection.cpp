@@ -19,10 +19,7 @@ void to_json(json &j, const Connection &connection) {
        {"layers", connection.layers},
        {"spaces", connection.spaces},
        {"nodes", connection.nodes}};
-
-  json base;
-  to_json(base, static_cast<const Feature &>(connection));
-  j.merge_patch(base);
+  to_json(j, static_cast<const Feature &>(connection));
 }
 
 void to_json(json &j, const ConnectionPtr &connection) {

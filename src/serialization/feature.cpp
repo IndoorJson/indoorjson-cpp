@@ -15,7 +15,7 @@ namespace indoor_json {
 using json = nlohmann::json;
 
 void to_json(json &j, const Feature &feature) {
-  j = json{{"id", feature.id}};
+  if (!feature.id.empty()) j.push_back({"id", feature.id});
   if (!feature.name.empty()) j.push_back({"name", feature.name});
   if (!feature.description.empty())
     j.push_back({"description", feature.description});

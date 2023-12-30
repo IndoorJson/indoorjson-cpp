@@ -16,9 +16,7 @@ namespace indoor_json {
 using json = nlohmann::json;
 
 void to_json(json &j, const CellBoundary &boundary) {
-  json base;
-  to_json(base, static_cast<const Feature &>(boundary));
-  j.merge_patch(base);
+  j = {{"edge", boundary.edge}, {"spaces", boundary.spaces}};
 
   if (boundary.geom != nullptr) {
     geos::io::WKTWriter writer;
@@ -27,8 +25,7 @@ void to_json(json &j, const CellBoundary &boundary) {
     j.push_back({"geom", nullptr});
   }
 
-  j.push_back({"edge", boundary.edge});
-  j.push_back({"spaces", boundary.spaces});
+  to_json(j, static_cast<const Feature &>(boundary));
 }
 
 void to_json(json &j, const CellBoundaryPtr &boundary) {

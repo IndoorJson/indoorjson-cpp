@@ -18,9 +18,7 @@ using json = nlohmann::json;
 
 void to_json(json &j, const PrimalSpaceLayer &layer) {
   j = {{"spaces", layer.spaces}, {"boundaries", layer.boundaries}};
-  json base;
-  to_json(base, static_cast<const Feature &>(layer));
-  j.merge_patch(base);
+  to_json(j, static_cast<const Feature &>(layer));
 }
 void to_json(json &j, const PrimalSpaceLayerPtr &layer) {
   to_json(j, *layer.get());
