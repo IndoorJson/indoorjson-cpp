@@ -7,22 +7,18 @@
  * Create Date: 2023/12/23
  *
  */
-#include <geos/io/WKTReader.h>
-#include <geos/io/WKTWriter.h>
 #include <serialization.h>
 
 namespace indoor_json {
 
-using json = nlohmann::json;
-
-void to_json(json &j, const CellSpace &space) {
+void to_json(nlohmann::json &j, const CellSpace &space) {
   j = {{"node", space.node},
        {"boundaries", space.boundaries},
        {"geom", space.geom}};
   to_json(j, static_cast<const Feature &>(space));
 }
 
-void from_json(const json &j, CellSpace &space) {
+void from_json(const nlohmann::json &j, CellSpace &space) {
   j.at("geom").get_to(space.geom);
   j.at("boundaries").get_to(space.boundaries);
   j.at("node").get_to(space.node);

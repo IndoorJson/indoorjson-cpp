@@ -11,14 +11,12 @@
 
 namespace indoor_json {
 
-using json = nlohmann::json;
-
-void to_json(json &j, const Node &node) {
+void to_json(nlohmann::json &j, const Node &node) {
   j = {{"space", node.space}, {"edges", node.edges}, {"geom", node.geom}};
   to_json(j, static_cast<const Feature &>(node));
 }
 
-void from_json(const json &j, Node &node) {
+void from_json(const nlohmann::json &j, Node &node) {
   j.at("geom").get_to(node.geom);
   j.at("space").get_to(node.space);
   j.at("edges").get_to(node.edges);

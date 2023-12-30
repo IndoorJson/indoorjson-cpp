@@ -7,14 +7,11 @@
  * Create Date: 2023/12/23
  *
  */
-#include <glog/logging.h>
 #include <serialization.h>
 
 namespace indoor_json {
 
-using json = nlohmann::json;
-
-void to_json(json &j, const Feature &feature) {
+void to_json(nlohmann::json &j, const Feature &feature) {
   if (!feature.id.empty()) j.push_back({"id", feature.id});
   if (!feature.name.empty()) j.push_back({"name", feature.name});
   if (!feature.description.empty())
@@ -25,7 +22,7 @@ void to_json(json &j, const Feature &feature) {
     j.push_back({"envelope", feature.envelope->toString()});
 }
 
-void from_json(const json &j, Feature &feature) {
+void from_json(const nlohmann::json &j, Feature &feature) {
   if (j.contains("id")) j.at("id").get_to(feature.id);
   if (j.contains("name")) j.at("name").get_to(feature.name);
   if (j.contains("description"))

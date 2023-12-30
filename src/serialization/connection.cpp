@@ -8,13 +8,10 @@
  *
  */
 #include <serialization.h>
-#include <connection.h>
 
 namespace indoor_json {
 
-using json = nlohmann::json;
-
-void to_json(json &j, const Connection &connection) {
+void to_json(nlohmann::json &j, const Connection &connection) {
   j = {{"comment", connection.comment},
        {"layers", connection.layers},
        {"spaces", connection.spaces},
@@ -22,7 +19,7 @@ void to_json(json &j, const Connection &connection) {
   to_json(j, static_cast<const Feature &>(connection));
 }
 
-void from_json(const json &j, Connection &connection) {
+void from_json(const nlohmann::json &j, Connection &connection) {
   j.at("comment").get_to(connection.comment);
   j.at("layers").get_to(connection.layers);
   j.at("spaces").get_to(connection.spaces);
